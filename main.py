@@ -1,6 +1,5 @@
 import urllib.parse, urllib.request, urllib.error
 import json
-from pprint import pprint
 import ssl
 from googletrans import Translator
 
@@ -34,12 +33,12 @@ def get_city_weather_data(city: str, data=None):
                 return js_dct
         except urllib.error.HTTPError:
             print("wrong city name")
+            break
 
 
 city = input("Введіть місто:\n")
 city_json_data = get_city_weather_data(city)
 if city_json_data:
-    pprint(city_json_data)
     print(f"Місто {city}:\n"
           f"Температура: {kelvin_to_celsius(city_json_data['main']['temp'])}\n"
           f"Погода: {en_to_uk(city_json_data['weather'][0]['description'])}")
